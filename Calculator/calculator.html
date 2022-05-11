@@ -1,0 +1,331 @@
+<!DOCTYPE html>  
+<html lang = "en">  
+<head>  
+<title> Calculator </title>
+<style>
+    .formstyle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 140.42px;
+    background: #000000;
+    border-radius: 0px;
+    }
+
+    h1 {
+    position: absolute;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    }
+
+    input {
+        width: 30px;
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+
+    
+    
+    #calc {
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 290.42px;
+        height: 52px;
+
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+
+
+    #seven {
+        position: absolute;
+        top: 35%;
+        left: 15%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 56.97px;
+        height: 34px;
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+
+    #eight {
+        position: absolute;
+        top: 35%;
+        left: 38.3%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 56.97px;
+        height: 34px;
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+    
+    #nine{
+        position: absolute;
+        top: 35%;
+        left: 61.6%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 56.97px;
+        height: 34px;
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+    
+    #divide{
+        position: absolute;
+        top: 35%;
+        left: 85%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 56.97px;
+        height: 34px;
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+
+    #four{
+        position: absolute;
+        top: 50%;
+        left: 15%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 56.97px;
+        height: 34px;
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+
+    #five{
+        position: absolute;
+        top: 50%;
+        left: 38.3%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 56.97px;
+        height: 34px;
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+
+    #six{
+        position: absolute;
+        top: 50%;
+        left: 61.6%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 56.97px;
+        height: 34px;
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+
+    #multiply{
+        position: absolute;
+        top: 50%;
+        left: 85%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 56.97px;
+        height: 34px;
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+
+    #one{
+        position: absolute;
+        top: 65%;
+        left: 15%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 56.97px;
+        height: 34px;
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+
+    #two{
+        position: absolute;
+        top: 65%;
+        left: 38.3%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 56.97px;
+        height: 34px;
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+
+    #three{
+        position: absolute;
+        top: 65%;
+        left: 61.6%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 56.97px;
+        height: 34px;
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+
+    #minus{
+        position: absolute;
+        top: 65%;
+        left: 85%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 56.97px;
+        height: 34px;
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+
+    #zero{
+        position: absolute;
+        top: 80%;
+        left: 15%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 56.97px;
+        height: 34px;
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+
+    #AC{
+        position: absolute;
+        top: 80%;
+        left: 38.3%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 56.97px;
+        height: 34px;
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+
+    #dot{
+        position: absolute;
+        top: 80%;
+        left: 61.6%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 56.97px;
+        height: 34px;
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+
+    #plus{
+        position: absolute;
+        top: 80%;
+        left: 85%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 56.97px;
+        height: 34px;
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+
+    
+
+    #equal {
+        position: absolute;
+        top: 93%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 290.42px;
+        height: 34px;
+        background: #F68F39;
+        border-radius: 4px; 
+    }
+
+
+
+
+
+    .Rectangle1{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 346px;
+        height: 337px;
+
+        background: #000000;
+        border-radius: 20px;
+    }
+
+    input{
+        font-family: Roboto;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 28px;
+        letter-spacing: 0em;
+        text-align: center;
+
+    }
+
+
+
+    
+
+</style>  
+</head>
+<body>  
+    <h1> Calculator</h1>  
+    <!-- <div class= "formstyle">   -->
+    <div class= "Rectangle1">  
+    <form name = "form1">  
+          
+        <!-- This input box shows the button pressed by the user in calculator. -->  
+      <input id = "calc" type ="text" name = "answer" class = "answer"> <br> <br>  
+      <!-- Display the calculator button on the screen. -->  
+      <!-- onclick() function display the number prsses by the user. -->  
+      <input type = "button" value = "1" id = "one" onclick = "form1.answer.value += '1' ">  
+      <input type = "button" value = "2" id = "two" onclick = "form1.answer.value += '2' ">  
+      <input type = "button" value = "3" id = "three" onclick = "form1.answer.value += '3' ">  
+      <input type = "button" value = "+" id = "plus" onclick = "form1.answer.value += '+' ">  
+      <br> <br>  
+        
+      <input type = "button" value = "4" id = "four" onclick = "form1.answer.value += '4' ">  
+      <input type = "button" value = "5" id = "five" onclick = "form1.answer.value += '5' ">  
+      <input type = "button" value = "6" id = "six" onclick = "form1.answer.value += '6' ">  
+      <input type = "button" value = "-" id = "minus" onclick = "form1.answer.value += '-' ">  
+      <br> <br>  
+        
+      <input type = "button" value = "7" id = "seven" onclick = "form1.answer.value += '7' ">  
+      <input type = "button" value = "8" id = "eight" onclick = "form1.answer.value += '8' ">  
+      <input type = "button" value = "9" id = "nine" onclick = "form1.answer.value += '9' ">  
+      <input type = "button" value = "*" id = "multiply" onclick = "form1.answer.value += '*' ">  
+      <br> <br>  
+        
+        
+      <input type = "button" value = "/" id = "divide" onclick = "form1.answer.value += '/' ">  
+      <input type = "button" value = "0" id = "zero" onclick = "form1.answer.value += '0' ">  
+      <input type = "button" value = "." id = "dot" onclick = "form1.answer.value += '.' ">  
+        <!-- When we click on the '=' button, the onclick() shows the sum results on the calculator screen. -->  
+      <input type = "button" value = "AC" id = "AC" onclick = "form1.answer.value = ' ' " id= "clear" >
+      
+      <br> <br>  
+      <!-- Display the Cancel button and erase all data entered by the user. -->  
+      <input type = "button" value = "=" id = "equal" onclick = "form1.answer.value = eval(form1.answer.value) "> 
+      
+      <br>   
+    
+    </form>  
+    </div>  
+</body>  
+
+<script src = "calculator.js"></script>
+</html> 
