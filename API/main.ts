@@ -1,6 +1,15 @@
 import router from './Routes/Router'
 import { json } from 'body-parser'
 import express, {Request, Response, NextFunction} from 'express'
+import { Pool } from 'pg'
+import {config} from './configuration'
+
+const pool = new Pool(config)
+
+export const query = (sql, params, callback) => {
+  return pool.query(sql, params, callback)
+}
+
 
 const app = express();
 app.use(json());
