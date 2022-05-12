@@ -1,55 +1,78 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createEmployee = exports.hello = exports.Controller = void 0;
+exports.deleteEmployeeByID = exports.modifyEmployeeByID = exports.getEmployeeByID = exports.createEmployee = exports.DisplayEmployees = exports.hello = void 0;
 const Employee_1 = require("../Model/Employee");
-class Controller {
-    constructor() {
-        this.employees = [];
-    }
-    hello(req, res) {
-        return res.json({
-            message: 'Hello World!'
-        });
-    }
-    showAllEmployee(req, res) {
-        var name = req.body.name;
-        var id = req.body.id;
-        var salary = req.body.salary;
-        try {
-            var department = req.body.department;
-        }
-        catch (err) {
-            res.status(400).send({ error: "Bad input of department." });
-        }
-        var newEmployee = new Employee_1.Employee(id, name, salary, department);
-        this.employees.push(newEmployee);
-        return res.json(this.jsonifyEmployee(newEmployee));
-    }
-    jsonifyEmployee(emp) {
-        let json = { id: emp.ID, name: emp.name, salary: emp.salary, department: emp.department };
-        return json;
-    }
-}
-exports.Controller = Controller;
+const employees = [];
 function hello(req, res) {
     res.json({
         message: 'Hello World!'
     });
 }
 exports.hello = hello;
-function createEmployee(req, res) {
+const DisplayEmployees = (req, res, next) => {
+    res.json({ Employees: employees });
+};
+exports.DisplayEmployees = DisplayEmployees;
+const createEmployee = (req, res, next) => {
+    const schemaCheckResult = Employee_1.employeeSchema.validate(req.body);
+    if (schemaCheckResult.error) {
+        res.status(400).json({ ErrorMessage: schemaCheckResult.error.details[0].message });
+        return;
+    }
     var name = req.body.name;
     var id = req.body.id;
     var salary = req.body.salary;
-    try {
-        var department = req.body.department;
-    }
-    catch (err) {
-        res.status(400).send({ error: "Bad input of department." });
-    }
+    var department = req.body.department;
     var newEmployee = new Employee_1.Employee(id, name, salary, department);
-    this.employees.push(newEmployee);
-    res.json(this.jsonifyEmployee(newEmployee));
-}
+    employees.push(newEmployee);
+    res.status(200).json({ CreatedEmployee: newEmployee });
+};
 exports.createEmployee = createEmployee;
+const getEmployeeByID = (req, res, next) => {
+    var empID = req.params.id;
+    for (let i = 0; i < employees.length; i++) {
+        var emp = employees[i];
+        if (emp.ID == empID) {
+            res.json({ employee: emp });
+            return;
+        }
+    }
+    res.status(400).send({ errorMessage: "No such employee with ID:" + String(empID) });
+};
+exports.getEmployeeByID = getEmployeeByID;
+const modifyEmployeeByID = (req, res, next) => {
+    var empID = req.params.id;
+    for (let i = 0; i < employees.length; i++) {
+        var emp = employees[i];
+        if (emp.ID == empID) {
+            let body = req.body;
+            body.id = empID;
+            const schemaCheckResult = Employee_1.employeeSchema.validate(body);
+            if (schemaCheckResult.error) {
+                res.status(400).json({ ErrorMessage: schemaCheckResult.error.details[0].message });
+                return;
+            }
+            let newEmployee = new Employee_1.Employee(empID, body.name, body.salary, body.department);
+            employees[i] = newEmployee;
+            res.json({ modifiedEmployee: newEmployee });
+            return;
+        }
+    }
+    res.status(400).json({ errorMessage: "No such employee with ID:" + String(empID) });
+};
+exports.modifyEmployeeByID = modifyEmployeeByID;
+const deleteEmployeeByID = (req, res, next) => {
+    var empID = req.params.id;
+    for (let i = 0; i < employees.length; i++) {
+        var emp = employees[i];
+        if (emp.ID == empID) {
+            let deletedEmployee = employees[i];
+            employees.splice(i, 1);
+            res.json({ deletedEmployee: deletedEmployee });
+            return;
+        }
+    }
+    res.status(400).json({ errorMessage: "No such employee with ID:" + String(empID) });
+};
+exports.deleteEmployeeByID = deleteEmployeeByID;
 //# sourceMappingURL=Controller.js.map

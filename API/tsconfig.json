@@ -7,8 +7,7 @@
     "esModuleInterop": true
   },
   "files": [
-    "main.ts",
-    "App.ts"
+    "main.ts"
   ],
   "include": [
     "src/**/*.ts"
