@@ -1,23 +1,6 @@
-// export type Dept = "MKT" | "HR" | "SD";
+
 import {DataType, Table, Model, Column, PrimaryKey, AllowNull} from 'sequelize-typescript'
 
-// export const Employee = sequelize.define('employee', {
-//     ID: {
-//         type: DataType.INTEGER,
-//         primaryKey: true
-//     },
-//     name: {
-//         type: DataType.STRING
-//     },
-//     salary: {
-//         type: DataType.INTEGER
-//     },
-//     department: {
-//         type: DataType.STRING
-//     }
-// }, {
-//     tableName: 'employees'
-// })
 
 @Table({
     timestamps: false,
@@ -51,22 +34,6 @@ export class Employees extends Model {
     department! :string;
 }
 
-
-
-
-// export class Employee {
-//     public name: String
-//     public ID: Number
-//     public salary: Number
-//     public department: String
-
-//     constructor(ID, name, salary, department : String) {
-//         this.ID = ID
-//         this.name = name
-//         this.salary = salary
-//         this.department = department
-//     }
-// }
 
 export enum Dept {
     MKT = "MKT",
