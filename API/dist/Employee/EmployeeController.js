@@ -1,31 +1,27 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteEmployeeByID = exports.modifyEmployeeByID = exports.getEmployeeByID = exports.createEmployee = exports.DisplayEmployees = exports.hello = void 0;
+exports.deleteEmployeeByID = exports.modifyEmployeeByID = exports.getEmployeeByID = exports.createEmployee = exports.getEmployees = exports.hello = void 0;
 const Employee_1 = require("../Model/Employee");
+const EmployeeService_1 = require("./EmployeeService");
 function hello(req, res) {
-    res.json({
+    res.send({
         message: 'Hello World!'
     });
 }
 exports.hello = hello;
-const DisplayEmployees = async (req, res, next) => {
-    const allEmployees = await Employee_1.Employees.findAll();
-    res.json({ Employees: allEmployees });
+const getEmployees = async (req, res, next) => {
+    const service = new EmployeeService_1.EmployeeService();
+    res.json({ Employees: service.getEmployees() });
 };
-exports.DisplayEmployees = DisplayEmployees;
+exports.getEmployees = getEmployees;
 const createEmployee = async (req, res, next) => {
-    const schemaCheckResult = Employee_1.employeeSchema.validate(req.body);
-    if (schemaCheckResult.error) {
-        res.status(400).json({ ErrorMessage: schemaCheckResult.error.details[0].message });
-        return;
-    }
-    Employee_1.Employees.create(req.body)
-        .then((employees) => {
-        res.status(200).json({ employeesCreated: req.body });
-        console.log(employees);
+    const service = new EmployeeService_1.EmployeeService();
+    service.createEmployee(req.body)
+        .then((employee) => {
+        res.status(200).json({ createdEmployee: employee });
     })
         .catch((err) => {
-        res.status(400).json({ errorMessage: err });
+        res.status(400).json({ errorMessage: "Errors!" });
     });
 };
 exports.createEmployee = createEmployee;
@@ -37,6 +33,7 @@ const getEmployeeByID = async (req, res, next) => {
         }
     }).then((results) => {
         res.status(200).json({ employee: results });
+        // res.send()
     }).catch((err) => {
         res.status(400).json({ errorMessage: err });
     });
@@ -71,4 +68,4 @@ const deleteEmployeeByID = async (req, res, next) => {
     });
 };
 exports.deleteEmployeeByID = deleteEmployeeByID;
-//# sourceMappingURL=Controller.js.map
+//# sourceMappingURL=EmployeeController.js.map

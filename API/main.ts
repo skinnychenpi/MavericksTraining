@@ -12,8 +12,11 @@ app.use(json());
 app.use('/', router);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  res.status(500).json({ErrorMessage: err.message})
+  res.status(500).send({ErrorMessage: err.message})
 })
+
+
+
 
 connection.sync().then(() => {
   console.log("Database is synced......")

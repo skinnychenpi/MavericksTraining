@@ -11,7 +11,7 @@ const app = (0, express_1.default)();
 app.use((0, body_parser_1.json)());
 app.use('/', Router_1.default);
 app.use((err, req, res, next) => {
-    res.status(500).json({ ErrorMessage: err.message });
+    res.status(500).send({ ErrorMessage: err.message });
 });
 config_1.default.sync().then(() => {
     console.log("Database is synced......");

@@ -1,11 +1,11 @@
 import {Router} from 'express'
-import {createEmployee, hello, getEmployeeByID, modifyEmployeeByID, deleteEmployeeByID, DisplayEmployees} from '../Controller/Controller'
+import {createEmployee, hello, getEmployeeByID, modifyEmployeeByID, deleteEmployeeByID, getEmployees} from '../Employee/Employee.controller'
 
 const router = Router();
 
 router.get('/', hello);
 
-router.get('/employee', DisplayEmployees);
+router.get('/employee', getEmployees);
 
 router.post('/employee', createEmployee);
 
