@@ -1,33 +1,33 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmployeeService = void 0;
-const Employee_1 = require("../Model/Employee");
+const Employee_model_1 = require("./Employee.model");
 class EmployeeService {
     constructor() {
         this.getEmployees = async () => {
-            return await Employee_1.Employees.findAll();
+            return await Employee_model_1.Employees.findAll();
         };
         this.createEmployee = async (employee) => {
-            await Employee_1.employeeSchema.validateAsync(employee);
+            await Employee_model_1.employeeSchema.validateAsync(employee);
             // if (schemaCheckResult.error) {
             //     res.status(400).json({ErrorMessage: schemaCheckResult.error.details[0].message})
             //     return
             // }
-            return await Employee_1.Employees.create(employee);
+            return await Employee_model_1.Employees.create(employee);
         };
         this.modifyEmployeeByID = async (employee) => {
-            await Employee_1.employeeSchema.validateAsync(employee);
-            return await Employee_1.Employees.update({ name: employee.name, salary: employee.salary, department: employee.department }, { where: { id: employee.id } });
+            await Employee_model_1.employeeSchema.validateAsync(employee);
+            return await Employee_model_1.Employees.update({ name: employee.name, salary: employee.salary, department: employee.department }, { where: { id: employee.id } });
         };
         this.getEmployeeByID = async (empID) => {
-            return await Employee_1.Employees.findAll({
+            return await Employee_model_1.Employees.findAll({
                 where: {
                     id: empID
                 }
             });
         };
         this.deleteEmployeeByID = async (empID) => {
-            return await Employee_1.Employees.destroy({
+            return await Employee_model_1.Employees.destroy({
                 where: {
                     id: empID
                 }

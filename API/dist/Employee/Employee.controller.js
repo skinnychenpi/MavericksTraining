@@ -45,7 +45,7 @@ const modifyEmployeeByID = async (req, res, next) => {
         if (numbers[0] > 0)
             res.send({ message: 'Success' });
         else
-            res.status(400).send({ message: "Cannot find ID." });
+            res.status(400).send({ message: 'Cannot find employees with ID:' + empID });
     })
         .catch((err) => {
         res.status(400).send({ message: "Errors!" });
