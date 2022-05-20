@@ -10,31 +10,40 @@ import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
+import {getData, modifyData} from '../../service/service'
+import Employee from "../../models/Employee";
 
-
-const EditButton: React.FC = () => {
+const EditButton: React.FC<{employeeUpdater : any, employee: Employee}> = (props) => {
 
   const departments = [
     {
-      value: 'HR',
+      value: "HR",
       label: 'HR',
     },
     {
-      value: 'SD',
+      value: "SD",
       label: 'Software Development',
     },
     {
-      value: 'MKT',
+      value: "MKT",
       label: 'Marketing',
     }
   ];
 
-  const [department, setDepartment] = React.useState('SD');
+  const [department, setDepartment] = React.useState(props.employee.department.trimEnd());
+
+  const [name, setName] = React.useState(props.employee.name);
+
+  const [salary, setSalary] = React.useState("" + props.employee.salary);
+
+
 
   const handleSetDepartment = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setDepartment(event.target.value);
+      setDepartment(event.target.value);
+      if (!nameError && !salaryError) setDisableEdit(false);
   };
 
+  const [disableEdit, setDisableEdit] = React.useState(true);
 
   const [wantEdit, setWantEdit] = React.useState(false);
 
@@ -46,14 +55,68 @@ const EditButton: React.FC = () => {
     setWantEdit(false);
   };
 
+  const [nameError, setNameError] = React.useState(false);
+  const [nameHelperText, setNameHelperText] = React.useState("");
+
+  const handleNameChange = (name : string) : void => {
+    setName(name);
+    if (! nameValidator(name)) {
+      setNameError(true);
+      setDisableEdit(true);
+    }
+    else {
+      setNameError(false);
+      setNameHelperText("");
+      if (!salaryError) setDisableEdit(false);
+    }
+  }
+
+  const nameValidator = (name : string) : Boolean => {
+    if (name.length < 2 || name.length > 30) {
+      setNameHelperText("The name should be of length 2 - 30.");
+      return false;
+    }
+    return true;
+  }
+
+  const[salaryError, setSalaryError] = React.useState(false);
+  const[salaryHelperText, setSalaryHelperText] = React.useState("");
+
+  const handleSalaryChange = (salary : string) : void => {
+    setSalary(salary);
+    if (! salaryValidator(salary)) {
+      setSalaryError(true);
+      setDisableEdit(true);
+    }
+    else {
+      setSalaryError(false);
+      setSalaryHelperText("");
+      if (!nameError) setDisableEdit(false);
+    }
+  }
+
+  const salaryValidator = (salary : string) : Boolean => {
+    let salaryNum = Number(salary);
+    if (Number.isNaN(salaryNum) || salaryNum < 0) {
+      setSalaryHelperText("The salary must be a positive number.");
+      return false;
+    }
+    return true;
+  }
+
   const handleConfirmEdit = () => {
+    setWantEdit(false);
+    let employee : Employee = new Employee(props.employee.id, name.trimEnd(), department.trimEnd(), Number(salary));
+    modifyData(employee)
+    .then(() => {getData().then((data) => props.employeeUpdater(data)).catch((err) => {console.log(err)})})
+    .catch((err) => {console.log(err)});
 
   };
 
   return (
     <>   
     <IconButton aria-label="edit" onClick = {handleClickEdit}>
-    <EditIcon />
+    <EditIcon sx={{ color: "#FFC32E"}}/>
     </IconButton>
     <Dialog open={wantEdit} onClose={handleCancelEdit}>
         <DialogTitle>Edit</DialogTitle>
@@ -71,6 +134,10 @@ const EditButton: React.FC = () => {
             type="email"
             fullWidth
             variant="standard"
+            error = {nameError}
+            onChange = {e => handleNameChange(e.target.value)}
+            helperText = {nameHelperText}
+            value = {props.employee.name.trimEnd()}
           />
           </Grid>
           <Grid item xs = {12} md = {6} lg = {6}>
@@ -82,6 +149,10 @@ const EditButton: React.FC = () => {
             type="email"
             fullWidth
             variant="standard"
+            error = {salaryError}
+            onChange = {e => handleSalaryChange(e.target.value)}
+            helperText = {salaryHelperText}
+            value = {props.employee.salary}
           />
         </Grid>
           <Grid item xs = {12} md = {12} lg = {12}>
@@ -89,7 +160,7 @@ const EditButton: React.FC = () => {
           id="select-department"
           select
           label="Department"
-          value={department}
+          value={props.employee.department.trimEnd()}
           onChange={handleSetDepartment}
           helperText="Please select department"
         >
@@ -104,7 +175,7 @@ const EditButton: React.FC = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCancelEdit}>Cancel</Button>
-          <Button onClick={handleConfirmEdit}>Confirm</Button>
+          <Button onClick={handleConfirmEdit} disabled = {disableEdit}>Confirm</Button>
         </DialogActions>
       </Dialog>
     </> 
