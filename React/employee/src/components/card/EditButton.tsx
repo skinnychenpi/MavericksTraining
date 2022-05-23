@@ -12,23 +12,9 @@ import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
 import {getData, modifyData} from '../../service/service'
 import Employee from "../../models/Employee";
+import {departments} from "../../models/Department"
 
 const EditButton: React.FC<{employeeUpdater : any, employee: Employee}> = (props) => {
-
-  const departments = [
-    {
-      value: "HR",
-      label: 'HR',
-    },
-    {
-      value: "SD",
-      label: 'Software Development',
-    },
-    {
-      value: "MKT",
-      label: 'Marketing',
-    }
-  ];
 
   const [department, setDepartment] = React.useState(props.employee.department.trimEnd());
 
@@ -49,6 +35,9 @@ const EditButton: React.FC<{employeeUpdater : any, employee: Employee}> = (props
 
   const handleClickEdit = () => {
     setWantEdit(true);
+    setSalary("" + props.employee.salary)
+    setName(props.employee.name)
+    setDepartment(props.employee.department)
   };
 
   const handleCancelEdit = () => {
@@ -137,7 +126,7 @@ const EditButton: React.FC<{employeeUpdater : any, employee: Employee}> = (props
             error = {nameError}
             onChange = {e => handleNameChange(e.target.value)}
             helperText = {nameHelperText}
-            value = {props.employee.name.trimEnd()}
+            defaultValue = {props.employee.name.trimEnd()}
           />
           </Grid>
           <Grid item xs = {12} md = {6} lg = {6}>
@@ -152,7 +141,7 @@ const EditButton: React.FC<{employeeUpdater : any, employee: Employee}> = (props
             error = {salaryError}
             onChange = {e => handleSalaryChange(e.target.value)}
             helperText = {salaryHelperText}
-            value = {props.employee.salary}
+            defaultValue = {props.employee.salary}
           />
         </Grid>
           <Grid item xs = {12} md = {12} lg = {12}>
@@ -160,7 +149,7 @@ const EditButton: React.FC<{employeeUpdater : any, employee: Employee}> = (props
           id="select-department"
           select
           label="Department"
-          value={props.employee.department.trimEnd()}
+          defaultValue={props.employee.department.trimEnd()}
           onChange={handleSetDepartment}
           helperText="Please select department"
         >

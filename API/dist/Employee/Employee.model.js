@@ -7,25 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.employeeSchema = exports.Dept = exports.Employees = void 0;
-// export type Dept = "MKT" | "HR" | "SD";
 const sequelize_typescript_1 = require("sequelize-typescript");
-// export const Employee = sequelize.define('employee', {
-//     ID: {
-//         type: DataType.INTEGER,
-//         primaryKey: true
-//     },
-//     name: {
-//         type: DataType.STRING
-//     },
-//     salary: {
-//         type: DataType.INTEGER
-//     },
-//     department: {
-//         type: DataType.STRING
-//     }
-// }, {
-//     tableName: 'employees'
-// })
 let Employees = class Employees extends sequelize_typescript_1.Model {
 };
 __decorate([
@@ -60,18 +42,6 @@ Employees = __decorate([
     })
 ], Employees);
 exports.Employees = Employees;
-// export class Employee {
-//     public name: String
-//     public ID: Number
-//     public salary: Number
-//     public department: String
-//     constructor(ID, name, salary, department : String) {
-//         this.ID = ID
-//         this.name = name
-//         this.salary = salary
-//         this.department = department
-//     }
-// }
 var Dept;
 (function (Dept) {
     Dept["MKT"] = "MKT";

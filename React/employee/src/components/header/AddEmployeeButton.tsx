@@ -13,22 +13,9 @@ import MenuItem from "@mui/material/MenuItem";
 import Grid from "@mui/material/Grid";
 import Employee from "../../models/Employee";
 import {addData, getData} from '../../service/service'
+import {departments} from "../../models/Department"
 
 const AddEmployeeButton: React.FC<{employeeUpdater : any}> = (props) => {
-  const departments = [
-    {
-      value: "HR",
-      label: "HR",
-    },
-    {
-      value: "SD",
-      label: "Software Development",
-    },
-    {
-      value: "MKT",
-      label: "Marketing",
-    },
-  ];
 
   const GreenButton = styled(Button)<ButtonProps>(({ theme }) => ({
     color: theme.palette.getContrastText("#34933B"),

@@ -9,9 +9,9 @@ const ButtonAppBar: React.FC<{employeeUpdater : any}>  = (props) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx = {{background : "#365271"}}>
         <Toolbar>
-          <Typography variant="h4" component="div" sx={{ flexGrow: 1 }} align="left">
+          <Typography variant="h4" component="div" sx={{ flexGrow: 1, color: '#FFFFFF'}} align="left">
             Employees
           </Typography>
           {/* <GreenButton variant = "contained" color="inherit" startIcon={<AddIcon />}>Add Employee</GreenButton> */}

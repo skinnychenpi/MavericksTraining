@@ -5,7 +5,9 @@ const Employee_model_1 = require("./Employee.model");
 class EmployeeService {
     constructor() {
         this.getEmployees = async () => {
-            return await Employee_model_1.Employees.findAll();
+            return await Employee_model_1.Employees.findAll({
+                order: [['id', 'ASC']]
+            });
         };
         this.createEmployee = async (employee) => {
             await Employee_model_1.employeeSchema.validateAsync(employee);

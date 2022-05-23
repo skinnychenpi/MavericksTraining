@@ -7,8 +7,30 @@ import Employee from "../../models/Employee";
 import Grid from "@mui/material/Grid";
 import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const EmployeeCard: React.FC<{ item: Employee, employeeUpdater : any}> = (props) => {
+
+  // const style = {{"font-family": 'Roboto', font-style: "normal", display: "flex", align-items: "center", color: "#365271"}};
+
+  const theme = createTheme({
+    typography: {
+      // Tell MUI what the font-size on the html element is.
+      h5: {
+          position: "absolute",
+          width: "242px",
+          height: "26px",
+          fontStyle: "normal",
+          fontWeight: 700,
+          fontSize: "24px",
+          lineHeight: "28px",
+          display: "flex",
+          alignItems: "center",
+          color: '#365271'
+      }
+    }
+  });
+
 
   return (
     <Card sx={{ minWidth: 275, background: "#EAEAEA",
@@ -22,22 +44,26 @@ const EmployeeCard: React.FC<{ item: Employee, employeeUpdater : any}> = (props)
       >
         <Grid item xs={8} md={8} lg={8} direction="column">
           <CardContent>
+            <ThemeProvider theme = {theme}>
             <Typography variant="h5" component="div" align="left">
               {props.item.name}
             </Typography>
+            </ThemeProvider>
+            <br></br>
+            <br></br>
             <Typography
               sx={{ mb: 2 }}
               component="div"
-              color="text.secondary"
               align="left"
+              color = '#365271'
             >
               {props.item.department}
             </Typography>
             <Typography
               sx={{ mb: 2 }}
               component="div"
-              color="text.secondary"
               align="left"
+              color = '#365271'
             >
               ${props.item.salary}
             </Typography>

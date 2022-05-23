@@ -66,7 +66,7 @@ export const deleteEmployeeByID: RequestHandler<{id: Number}> = async (req, res,
         if (number == 1) {
             res.send({message: 'Success'})
         } else {
-            res.send({message: 'Cannot find employees with ID:' + empID})
+            res.status(400).send({message: 'Cannot find employees with ID:' + empID})
         }
     })
     .catch((err) => {

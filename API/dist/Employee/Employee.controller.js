@@ -61,7 +61,7 @@ const deleteEmployeeByID = async (req, res, next) => {
             res.send({ message: 'Success' });
         }
         else {
-            res.send({ message: 'Cannot find employees with ID:' + empID });
+            res.status(400).send({ message: 'Cannot find employees with ID:' + empID });
         }
     })
         .catch((err) => {

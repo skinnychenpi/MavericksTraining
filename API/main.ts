@@ -4,11 +4,11 @@ import express, {Request, Response, NextFunction} from 'express'
 import { Sequelize } from 'sequelize'
 import {config, sequelizeConfig} from './configuration'
 import connection from './DB/config'
-
+import cors from 'cors';
 
 const app = express();
 app.use(json());
-
+app.use(cors());
 app.use('/', router);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
@@ -24,4 +24,4 @@ connection.sync().then(() => {
   console.log("Database can't be synced, the error is: " + err)
 })
 
-app.listen(3000)
+app.listen(5000)
