@@ -29,6 +29,12 @@ const AddEmployeeButton: React.FC = () => {
     },
   }));
 
+  const IDErrorText = "The ID must be a positive number.";
+
+  const nameErrorText = "The name should be of length 2 - 30.";
+
+  const salaryErrorText = "The salary must be a positive number.";
+
   const [department, setDepartment] = React.useState("SD");
 
   const handleSetDepartment = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,9 +44,7 @@ const AddEmployeeButton: React.FC = () => {
   const [name, setName] = React.useState("");
 
   const [nameError, setNameError] = React.useState(true);
-  const [nameHelperText, setNameHelperText] = React.useState(
-    "The name should be of length 2 - 30."
-  );
+  const [nameHelperText, setNameHelperText] = React.useState(nameErrorText);
 
   const handleNameChange = (name: string): void => {
     setName(name);
@@ -56,7 +60,7 @@ const AddEmployeeButton: React.FC = () => {
 
   const nameValidator = (name: string): Boolean => {
     if (name.length < 2 || name.length > 30) {
-      setNameHelperText("The name should be of length 2 - 30.");
+      setNameHelperText(nameErrorText);
       return false;
     }
     return true;
@@ -65,9 +69,7 @@ const AddEmployeeButton: React.FC = () => {
   const [salary, setSalary] = React.useState("");
 
   const [salaryError, setSalaryError] = React.useState(true);
-  const [salaryHelperText, setSalaryHelperText] = React.useState(
-    "The salary must be a positive number."
-  );
+  const [salaryHelperText, setSalaryHelperText] = React.useState(IDErrorText);
 
   const handleSalaryChange = (salary: string): void => {
     setSalary(salary);
@@ -84,7 +86,7 @@ const AddEmployeeButton: React.FC = () => {
   const salaryValidator = (salary: string): Boolean => {
     let salaryNum = Number(salary);
     if (salary.length === 0 || Number.isNaN(salaryNum) || salaryNum < 0) {
-      setSalaryHelperText("The salary must be a positive number.");
+      setSalaryHelperText(salaryErrorText);
       return false;
     }
     return true;
@@ -93,9 +95,7 @@ const AddEmployeeButton: React.FC = () => {
   const [ID, setID] = React.useState("");
 
   const [IDError, setIDError] = React.useState(true);
-  const [IDHelperText, setIDHelperText] = React.useState(
-    "The ID must be a positive number."
-  );
+  const [IDHelperText, setIDHelperText] = React.useState(IDErrorText);
 
   const handleIDChange = (ID: string): void => {
     setID(ID);
@@ -112,7 +112,7 @@ const AddEmployeeButton: React.FC = () => {
   const IDValidator = (ID: string): Boolean => {
     let IDNum = Number(ID);
     if (ID.length === 0 || Number.isNaN(IDNum) || IDNum < 0) {
-      setIDHelperText("The ID must be a positive number.");
+      setIDHelperText(IDErrorText);
       return false;
     }
     return true;
@@ -132,6 +132,19 @@ const AddEmployeeButton: React.FC = () => {
 
   const handleConfirmAdd = () => {
     setWantAdd(false);
+    
+    // Restore to default
+    setName("");
+    setDepartment("SD");
+    setSalary("");
+    setID("");
+    setNameError(true);
+    setSalaryError(true);
+    setIDError(true);
+    setNameHelperText(nameErrorText);
+    setSalaryHelperText(salaryErrorText);
+    setIDHelperText(IDErrorText);
+
     let EmpToAdd = new Employee(Number(ID), name, department, Number(salary));
     addData(EmpToAdd)
     .then(() => {
