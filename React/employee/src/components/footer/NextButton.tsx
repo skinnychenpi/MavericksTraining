@@ -1,21 +1,18 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { employeeActions } from '../../store/store';
 
 
-const NextButton : React.FC<{currentPage: number, pageNumUpdater: any, numOfEmployees: number}> = (props) => {
+const NextButton : React.FC<{currentPage: number, numOfEmployees: number}> = (props) => {
 
     const dispatch = useDispatch();
 
     const nextHandler = ():void => {
         dispatch(employeeActions.nextPage());
     };
-
-    const pageNum = useSelector((state : any) => state.employee.pageNum);
-    const numOfEmployees = useSelector( (state : any) => state.employee.employees.length);
     
-    if (pageNum * 10 + 1 > numOfEmployees) {
+    if (props.currentPage * 10 + 1 > props.numOfEmployees) {
         return (
             <Button disabled color="inherit">Next</Button>
         )

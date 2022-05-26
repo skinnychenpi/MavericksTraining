@@ -7,11 +7,15 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { getData, deleteData } from "../../service/service";
+import { deleteData } from "../../service/service";
+import {useDispatch} from 'react-redux';
+import {getEmployeeData} from '../../store/store';
 
-const DeleteButton: React.FC<{ employeeUpdater: any, empID: number }> = (
+const DeleteButton: React.FC<{ empID: number }> = (
   props
 ) => {
+  const dispatch = useDispatch();
+
   const [wantDeleted, setWantDeleted] = React.useState(false);
 
   const handleClickDelete = () => {
@@ -26,7 +30,7 @@ const DeleteButton: React.FC<{ employeeUpdater: any, empID: number }> = (
     setWantDeleted(false);
     deleteData(props.empID)
     .then(() => {
-      getData().then((data) => {props.employeeUpdater(data)}).catch((err) => {console.log(err)});
+      dispatch(getEmployeeData());
     })
     .catch((err) => {
         console.log(err);

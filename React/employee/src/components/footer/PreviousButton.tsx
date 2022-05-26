@@ -1,10 +1,10 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import { employeeActions } from '../../store/store';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 
-const PreviousButton : React.FC<{currentPage: number, pageNumUpdater: any, numOfEmployees: number}> = (props) => {
+const PreviousButton : React.FC<{currentPage: number, numOfEmployees: number}> = (props) => {
 
     const dispatch = useDispatch();
 
@@ -12,9 +12,7 @@ const PreviousButton : React.FC<{currentPage: number, pageNumUpdater: any, numOf
         dispatch(employeeActions.prevPage());
     };
 
-    const pageNum = useSelector((state : any) => state.employee.pageNum);
-
-    if (pageNum === 1) {
+    if (props.currentPage === 1) {
         return  (
             <Button disabled color="inherit">Preivous</Button>
         )

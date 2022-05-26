@@ -9,7 +9,7 @@ import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const EmployeeCard: React.FC<{ item: Employee, employeeUpdater : any}> = (props) => {
+const EmployeeCard: React.FC<{ item: Employee}> = (props) => {
 
   // const style = {{"font-family": 'Roboto', font-style: "normal", display: "flex", align-items: "center", color: "#365271"}};
 
@@ -72,8 +72,8 @@ const EmployeeCard: React.FC<{ item: Employee, employeeUpdater : any}> = (props)
 
         <Grid item xs={3} md={3} lg={3} direction="column">
           <CardActions>
-            <EditButton employeeUpdater = {props.employeeUpdater} employee = {props.item}/>
-            <DeleteButton employeeUpdater = {props.employeeUpdater} empID = {props.item.id}/>
+            <EditButton employee = {props.item}/>
+            <DeleteButton empID = {props.item.id}/>
           </CardActions>
         </Grid>
       </Grid>

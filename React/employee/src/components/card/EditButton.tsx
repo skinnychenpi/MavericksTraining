@@ -10,11 +10,13 @@ import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
-import {getData, modifyData} from '../../service/service'
+import { modifyData } from '../../service/service'
 import Employee from "../../models/Employee";
 import {departments} from "../../models/Department"
+import {useDispatch} from 'react-redux';
+import {getEmployeeData} from '../../store/store';
 
-const EditButton: React.FC<{employeeUpdater : any, employee: Employee}> = (props) => {
+const EditButton: React.FC<{employee: Employee}> = (props) => {
 
   const [department, setDepartment] = React.useState(props.employee.department.trimEnd());
 
@@ -22,7 +24,7 @@ const EditButton: React.FC<{employeeUpdater : any, employee: Employee}> = (props
 
   const [salary, setSalary] = React.useState("" + props.employee.salary);
 
-
+  const dispatch = useDispatch();
 
   const handleSetDepartment = (event: React.ChangeEvent<HTMLInputElement>) => {
       setDepartment(event.target.value);
@@ -97,7 +99,7 @@ const EditButton: React.FC<{employeeUpdater : any, employee: Employee}> = (props
     setWantEdit(false);
     let employee : Employee = new Employee(props.employee.id, name.trimEnd(), department.trimEnd(), Number(salary));
     modifyData(employee)
-    .then(() => {getData().then((data) => props.employeeUpdater(data)).catch((err) => {console.log(err)})})
+    .then(() => {dispatch(getEmployeeData())})
     .catch((err) => {console.log(err)});
 
   };

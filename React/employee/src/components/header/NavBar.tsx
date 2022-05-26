@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import AddEmployeeButton from './AddEmployeeButton';
 
-const ButtonAppBar: React.FC<{employeeUpdater : any}>  = (props) => {
+const ButtonAppBar: React.FC = (props) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -14,8 +14,7 @@ const ButtonAppBar: React.FC<{employeeUpdater : any}>  = (props) => {
           <Typography variant="h4" component="div" sx={{ flexGrow: 1, color: '#FFFFFF'}} align="left">
             Employees
           </Typography>
-          {/* <GreenButton variant = "contained" color="inherit" startIcon={<AddIcon />}>Add Employee</GreenButton> */}
-          <AddEmployeeButton employeeUpdater = {props.employeeUpdater}/>
+          <AddEmployeeButton/>
         </Toolbar>
       </AppBar>
     </Box>

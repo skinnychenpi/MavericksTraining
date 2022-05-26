@@ -12,10 +12,14 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Grid from "@mui/material/Grid";
 import Employee from "../../models/Employee";
-import {addData, getData} from '../../service/service'
-import {departments} from "../../models/Department"
+import {addData} from '../../service/service';
+import {departments} from "../../models/Department";
+import {useDispatch} from 'react-redux';
+import {getEmployeeData} from '../../store/store';
 
-const AddEmployeeButton: React.FC<{employeeUpdater : any}> = (props) => {
+const AddEmployeeButton: React.FC = () => {
+
+  const dispatch = useDispatch();
 
   const GreenButton = styled(Button)<ButtonProps>(({ theme }) => ({
     color: theme.palette.getContrastText("#34933B"),
@@ -131,7 +135,7 @@ const AddEmployeeButton: React.FC<{employeeUpdater : any}> = (props) => {
     let EmpToAdd = new Employee(Number(ID), name, department, Number(salary));
     addData(EmpToAdd)
     .then(() => {
-      getData().then((data) => props.employeeUpdater(data)).catch((err) => {console.log(err)})
+      dispatch(getEmployeeData())
     })
     .catch ((err) => {console.log(err)})
   };
