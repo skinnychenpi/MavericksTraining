@@ -15,6 +15,7 @@ import Employee from "../../models/Employee";
 import {departments} from "../../models/Department"
 import {useDispatch} from 'react-redux';
 import {getEmployeeData} from '../../store/store';
+import { alertActions } from '../../store/store';
 
 const EditButton: React.FC<{employee: Employee}> = (props) => {
 
@@ -99,8 +100,14 @@ const EditButton: React.FC<{employee: Employee}> = (props) => {
     setWantEdit(false);
     let employee : Employee = new Employee(props.employee.id, name.trimEnd(), department.trimEnd(), Number(salary));
     modifyData(employee)
-    .then(() => {dispatch(getEmployeeData())})
-    .catch((err) => {console.log(err)});
+    .then(() => {
+      dispatch(alertActions.turnOnEditSuccess());
+      dispatch(getEmployeeData())
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch(alertActions.turnOnEditFail());
+    });
 
   };
 

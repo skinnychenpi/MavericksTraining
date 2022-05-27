@@ -5,9 +5,6 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import { useSelector } from 'react-redux';
 
-
-
-
 const Cards : React.FC = () => {
 
     const employees : Employee[] = useSelector((state : any) => state.employee.employees);

@@ -16,9 +16,10 @@ import {addData} from '../../service/service';
 import {departments} from "../../models/Department";
 import {useDispatch} from 'react-redux';
 import {getEmployeeData} from '../../store/store';
+import { alertActions } from '../../store/store';
+
 
 const AddEmployeeButton: React.FC = () => {
-
   const dispatch = useDispatch();
 
   const GreenButton = styled(Button)<ButtonProps>(({ theme }) => ({
@@ -148,9 +149,13 @@ const AddEmployeeButton: React.FC = () => {
     let EmpToAdd = new Employee(Number(ID), name, department, Number(salary));
     addData(EmpToAdd)
     .then(() => {
+      dispatch(alertActions.turnOnAddSuccess());
       dispatch(getEmployeeData())
     })
-    .catch ((err) => {console.log(err)})
+    .catch ((err) => {
+      dispatch(alertActions.turnOnAddFail());
+      console.log(err);
+    })
   };
 
   return (

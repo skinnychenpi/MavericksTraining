@@ -3,9 +3,9 @@ import './App.css';
 import Cards from './components/cards/Cards';
 import NavBar from './components/header/NavBar'
 import Footer from './components/footer/Footer'
-import {useDispatch} from 'react-redux';
+import {useDispatch } from 'react-redux';
 import {getEmployeeData} from './store/store';
-
+import Alert from './components/alert/Alert';
 function App() {
   // const employeeSample : Employee[] = [new Employee(1,'Leo',"HR", 123), new Employee(2,'Lee',"HR", 125), new Employee(3, 'Cris', 'SD', 250),
   // new Employee(3, 'Cris', 'SD', 250), new Employee(3, 'Cris', 'SD', 250), new Employee(3, 'Cris', 'SD', 250), new Employee(3, 'Cris', 'SD', 250),
@@ -27,6 +27,7 @@ function App() {
         <br></br>
         <Cards></Cards>
         <br></br>
+        <Alert/>
         <Footer/>
     </div>
   );

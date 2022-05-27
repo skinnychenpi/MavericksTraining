@@ -20,10 +20,60 @@ const employeeSlice = createSlice({
     }
 })
 
+const alertSlice = createSlice({
+    name:'alert',
+    initialState: {
+    openAddSuccessAlert: false, 
+    openAddFailAlert: false, 
+    openEditSuccessAlert: false,
+    openEditFailAlert : false,
+    openDeleteSuccessAlert: false,
+    openDeleteFailAlert: false
+},
+    reducers: {
+        turnOnAddSuccess(state) {
+            state.openAddSuccessAlert = true;
+        },
+        turnOffAddSuccess(state) {
+            state.openAddSuccessAlert = false;
+        },
+        turnOnAddFail(state) {
+            state.openAddFailAlert = true;
+        },
+        turnOffAddFail(state) {
+            state.openAddFailAlert = false;
+        },
+        turnOnEditSuccess(state) {
+            state.openEditSuccessAlert = true;
+        },
+        turnOffEditSuccess(state) {
+            state.openEditSuccessAlert = false;
+        },
+        turnOnEditFail(state) {
+            state.openEditFailAlert = true;
+        },
+        turnOffEditFail(state) {
+            state.openEditFailAlert = false;
+        },
+        turnOnDeleteSuccess(state) {
+            state.openDeleteSuccessAlert = true;
+        },
+        turnOffDeleteSuccess(state) {
+            state.openDeleteSuccessAlert = false;
+        },
+        turnOnDeleteFail(state) {
+            state.openDeleteFailAlert = true;
+        },
+        turnOffDeleteFail(state) {
+            state.openDeleteFailAlert = false;
+        }
+    }
+})
+
 
 
 const store = configureStore({
-    reducer:{employee: employeeSlice.reducer},
+    reducer:{employee: employeeSlice.reducer, alert:alertSlice.reducer},
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunkMiddleware),
 });
 
@@ -39,5 +89,7 @@ export const getEmployeeData = () : any => {
       .catch((err) => {console.log(err)});
     }
   };
+
+export const alertActions = alertSlice.actions;
 
 export default store;

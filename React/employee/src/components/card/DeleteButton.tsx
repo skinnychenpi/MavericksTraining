@@ -10,6 +10,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { deleteData } from "../../service/service";
 import {useDispatch} from 'react-redux';
 import {getEmployeeData} from '../../store/store';
+import { alertActions } from '../../store/store';
 
 const DeleteButton: React.FC<{ empID: number }> = (
   props
@@ -30,10 +31,12 @@ const DeleteButton: React.FC<{ empID: number }> = (
     setWantDeleted(false);
     deleteData(props.empID)
     .then(() => {
+      dispatch(alertActions.turnOnDeleteSuccess());
       dispatch(getEmployeeData());
     })
     .catch((err) => {
-        console.log(err);
+      dispatch(alertActions.turnOnDeleteFail());
+      console.log(err);
     });
   };
 
