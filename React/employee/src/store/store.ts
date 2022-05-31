@@ -20,6 +20,21 @@ const employeeSlice = createSlice({
     }
 })
 
+export const getEmployeeData = () : any => {
+    return async (dispatch : any) => {
+      getData()
+      .then((data) => {
+        dispatch(employeeActions.setEmployees(data))
+      })
+      .catch((err) => {console.log(err)});
+    }
+  };
+
+export const employeeActions = employeeSlice.actions;
+
+
+
+
 const alertSlice = createSlice({
     name:'alert',
     initialState: {
@@ -71,25 +86,13 @@ const alertSlice = createSlice({
 })
 
 
+export const alertActions = alertSlice.actions;
+
+
+
 
 const store = configureStore({
     reducer:{employee: employeeSlice.reducer, alert:alertSlice.reducer},
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunkMiddleware),
 });
-
-export const employeeActions = employeeSlice.actions;
-
-
-export const getEmployeeData = () : any => {
-    return async (dispatch : any) => {
-      getData()
-      .then((data) => {
-        dispatch(employeeActions.setEmployees(data))
-      })
-      .catch((err) => {console.log(err)});
-    }
-  };
-
-export const alertActions = alertSlice.actions;
-
 export default store;
