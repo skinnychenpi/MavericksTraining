@@ -11,12 +11,12 @@ import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Grid from "@mui/material/Grid";
-import Employee from "../../models/Employee";
-import {addData} from '../../service/service';
-import {departments} from "../../models/Department";
+import Employee from "../../../models/Employee";
+import {addData} from '../../../service/service';
+import {departments} from "../../../models/Department";
 import {useDispatch} from 'react-redux';
-import {getEmployeeData} from '../../store/store';
-import { alertActions } from '../../store/store';
+import {getEmployeeData} from '../../../store/store';
+import { alertActions } from '../../../store/store';
 
 
 const AddEmployeeButton: React.FC = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import Employee from '../../models/Employee'
+import Employee from '../../../../models/Employee';
 import EmployeeCard from '../card/EmployeeCard';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';

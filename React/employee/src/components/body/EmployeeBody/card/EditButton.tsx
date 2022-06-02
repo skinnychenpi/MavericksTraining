@@ -10,12 +10,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
-import { modifyData } from '../../service/service'
-import Employee from "../../models/Employee";
-import {departments} from "../../models/Department"
+import { modifyData } from '../../../../service/service'
+import Employee from "../../../../models/Employee";
+import {departments} from "../../../../models/Department"
 import {useDispatch} from 'react-redux';
-import {getEmployeeData} from '../../store/store';
-import { alertActions } from '../../store/store';
+import {getEmployeeData} from '../../../../store/store';
+import { alertActions, authActions } from '../../../../store/store';
 
 const EditButton: React.FC<{employee: Employee}> = (props) => {
 
@@ -106,6 +106,7 @@ const EditButton: React.FC<{employee: Employee}> = (props) => {
     })
     .catch((err) => {
       console.log(err);
+      if (err.response.data.tokenError) dispatch(authActions.logout());
       dispatch(alertActions.turnOnEditFail());
     });
 

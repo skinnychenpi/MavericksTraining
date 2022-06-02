@@ -7,10 +7,10 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { deleteData } from "../../service/service";
+import { deleteData } from "../../../../service/service";
 import {useDispatch} from 'react-redux';
-import {getEmployeeData} from '../../store/store';
-import { alertActions } from '../../store/store';
+import {getEmployeeData} from '../../../../store/store';
+import { alertActions, authActions } from '../../../../store/store';
 
 const DeleteButton: React.FC<{ empID: number }> = (
   props
@@ -35,6 +35,9 @@ const DeleteButton: React.FC<{ empID: number }> = (
       dispatch(getEmployeeData());
     })
     .catch((err) => {
+      if (err.response.data.tokenError) {
+        dispatch(authActions.logout());
+      }
       dispatch(alertActions.turnOnDeleteFail());
       console.log(err);
     });

@@ -3,7 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import AddEmployeeButton from './AddEmployeeButton';
+import Button from "@mui/material/Button";
 
 const ButtonAppBar: React.FC = (props) => {
 
@@ -14,7 +14,8 @@ const ButtonAppBar: React.FC = (props) => {
           <Typography variant="h4" component="div" sx={{ flexGrow: 1, color: '#FFFFFF'}} align="left">
             Employees
           </Typography>
-          <AddEmployeeButton/>
+          <Button color="inherit" href="/login">Login</Button>
+          <Button color="inherit" href="/sign-up">Sign Up</Button>
         </Toolbar>
       </AppBar>
     </Box>

@@ -63,6 +63,24 @@ const Alert : React.FC = () => {
     dispatch(alertActions.turnOffDeleteFail());
   };
 
+  //Authentication
+
+  const failLoginAlertOpen = useSelector((state : any) => state.alert.openLoginFailAlert);
+  const handleLoginFailAlertClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    dispatch(alertActions.turnOffLoginFail());
+  };
+
+  const failRegisterAlertOpen = useSelector((state : any) => state.alert.openRegisterFailAlert);
+  const handleRegisterFailAlertClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    dispatch(alertActions.turnOffRegisterFail());
+  };
+
     return (
         <React.Fragment>
         <Snackbar open={successAddAlertOpen} autoHideDuration={6000} onClose={handleAddSuccessAlertClose}>
@@ -93,6 +111,16 @@ const Alert : React.FC = () => {
         <Snackbar open={failEditAlertOpen} autoHideDuration={6000} onClose={handleEditFailAlertClose}>
           <Alert onClose={handleEditFailAlertClose} severity="error" sx={{ width: '100%' }}>
             Errors at editing the employee!
+          </Alert>
+        </Snackbar>
+        <Snackbar open={failLoginAlertOpen} autoHideDuration={6000} onClose={handleLoginFailAlertClose}>
+          <Alert onClose={handleLoginFailAlertClose} severity="error" sx={{ width: '100%' }}>
+            Errors occurs when logging in!
+          </Alert>
+        </Snackbar>
+        <Snackbar open={failRegisterAlertOpen} autoHideDuration={6000} onClose={handleRegisterFailAlertClose}>
+          <Alert onClose={handleRegisterFailAlertClose} severity="error" sx={{ width: '100%' }}>
+            Errors occurs when signing up!
           </Alert>
         </Snackbar>
         </React.Fragment>

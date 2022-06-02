@@ -1,6 +1,7 @@
 import {createSlice, configureStore} from '@reduxjs/toolkit'
 import thunkMiddleware from 'redux-thunk'
-import {getData} from '../service/service'
+import { LoginDTO, RegisterDTO } from '../models/User'
+import {getData, login, register} from '../service/service'
 
 const initialState = {employees: [], pageNum : 1}
 
@@ -22,11 +23,18 @@ const employeeSlice = createSlice({
 
 export const getEmployeeData = () : any => {
     return async (dispatch : any) => {
-      getData()
-      .then((data) => {
+      try {
+        let data = await getData();
         dispatch(employeeActions.setEmployees(data))
-      })
-      .catch((err) => {console.log(err)});
+        // If we can successfully download the data, we can set the status as logged in.
+        dispatch(authActions.login());
+        dispatch(authActions.setToken(localStorage.getItem('token')));
+      } catch (err : any) {
+        if (err.response.data.tokenError) {
+            dispatch(authActions.logout());
+        }
+        console.log(err);
+      };
     }
   };
 
@@ -43,7 +51,9 @@ const alertSlice = createSlice({
     openEditSuccessAlert: false,
     openEditFailAlert : false,
     openDeleteSuccessAlert: false,
-    openDeleteFailAlert: false
+    openDeleteFailAlert: false,
+    openLoginFailAlert: false,
+    openRegisterFailAlert : false
 },
     reducers: {
         turnOnAddSuccess(state) {
@@ -81,6 +91,20 @@ const alertSlice = createSlice({
         },
         turnOffDeleteFail(state) {
             state.openDeleteFailAlert = false;
+        },
+
+        // Authentication
+        turnOnLoginFail(state) {
+            state.openLoginFailAlert = true;
+        },
+        turnOffLoginFail(state) {
+            state.openLoginFailAlert = false;
+        },
+        turnOnRegisterFail(state) {
+            state.openRegisterFailAlert = true;
+        },
+        turnOffRegisterFail(state) {
+            state.openRegisterFailAlert = false;
         }
     }
 })
@@ -90,9 +114,57 @@ export const alertActions = alertSlice.actions;
 
 
 
+const authSlice = createSlice({
+    name: 'auth',
+    initialState: {
+        isLoggedIn : false,
+        token : ""
+    },
+    reducers: {
+        login(state) {
+            state.isLoggedIn = true;
+        },
+        logout(state) {
+            state.isLoggedIn = false;
+            state.token = "";
+            localStorage.removeItem('token');
+        },
+        setToken(state, actions) {
+            state.token = actions.payload;
+            localStorage.setItem('token' , actions.payload);
+        }
+    }
+})
+
+export const userLogin = (user : LoginDTO) : any => {
+    return async (dispatch : any) => {
+        try {
+            let data = await login(user);
+            dispatch(authActions.setToken(data.token));
+            dispatch(authActions.login());
+        } catch (err) {
+            alertActions.turnOnLoginFail();
+          }
+        }
+    };
+
+export const userRegister = (user : RegisterDTO) : any => {
+    return async (dispatch : any) => {
+        try {
+            let data = await register(user);
+            dispatch(authActions.setToken(data.token));
+            dispatch(authActions.login());
+        } catch (err) {
+            alertActions.turnOnRegisterFail();
+        }
+    }
+}
+
+export const authActions = authSlice.actions;
+
 
 const store = configureStore({
-    reducer:{employee: employeeSlice.reducer, alert:alertSlice.reducer},
+    reducer:{employee: employeeSlice.reducer, alert:alertSlice.reducer, auth: authSlice.reducer},
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunkMiddleware),
 });
 export default store;
