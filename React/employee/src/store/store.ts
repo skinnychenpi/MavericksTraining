@@ -143,7 +143,7 @@ export const userLogin = (user : LoginDTO) : any => {
             dispatch(authActions.setToken(data.token));
             dispatch(authActions.login());
         } catch (err) {
-            alertActions.turnOnLoginFail();
+            dispatch(alertActions.turnOnLoginFail());
           }
         }
     };
@@ -155,7 +155,7 @@ export const userRegister = (user : RegisterDTO) : any => {
             dispatch(authActions.setToken(data.token));
             dispatch(authActions.login());
         } catch (err) {
-            alertActions.turnOnRegisterFail();
+            dispatch(alertActions.turnOnRegisterFail());
         }
     }
 }
