@@ -6,3 +6,9 @@ export class LoginDTO {
 export class LoginResponseDTO {
     token : string;
 }
+
+export class RegisterResponseDTO {
+    userName: string;
+    email: string;
+    token: string;
+}

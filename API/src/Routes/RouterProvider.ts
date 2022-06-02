@@ -8,7 +8,7 @@ export enum HttpMethod {
 export type RouteConfig = {
     method: HttpMethod,
     path: string,
-    handlers: RequestHandler[]
+    handlers: RequestHandler<any>[]
 }
 export const routerProvider = (nonConnectedRoutes: RouteConfig[], connectedRoutes: RouteConfig[])=>{
     const router = Router();

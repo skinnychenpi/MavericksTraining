@@ -9,9 +9,9 @@ dotenv.config();
 export const register: RequestHandler = async (req, res, next) => {
     const service = new AuthService();
     service.register(req.body)
-    .then((userWithToken) => {
+    .then(data => {
         // save user token
-        res.send({createdUser: userWithToken})
+        res.send(data)
     })
     .catch((err) => {
         res.status(400).send({errorMessage: "Errors!"})
@@ -21,8 +21,8 @@ export const register: RequestHandler = async (req, res, next) => {
 export const login: RequestHandler = async (req, res, next) => {
     const service = new AuthService();
     service.login(req.body)
-    .then((userWithToken) => {
-        res.send({createdUser: userWithToken})
+    .then((data) => {
+        res.send(data)
     })
     .catch( (err) => {
         res.status(400).send({errorMessage: "Errors!"});

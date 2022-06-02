@@ -9,14 +9,14 @@ export const verifyToken : RequestHandler = (req : any, res, next) => {
   console.log(req.headers);
   
   if (!token) {
-    return res.status(400).send("A token is required for authentication");
+    return res.status(400).send({tokenError: "A token is required for authentication"});
   }
   try {
     const decoded = jwt.verify(token, process.env.TOKEN_KEY);
 
     console.log(decoded);
   } catch (err) {
-    return res.status(400).send("Invalid Token");
+    return res.status(400).send({tokenError: "Invalid Token"});
   }
 
   next();

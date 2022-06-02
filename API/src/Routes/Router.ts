@@ -1,19 +1,41 @@
 import {createEmployee, hello, getEmployeeByID, modifyEmployeeByID, deleteEmployeeByID, getEmployees} from '../Employee/Employee.controller'
 import {register, login} from '../Auth/Auth.controller'
 import {HttpMethod, RouteConfig, routerProvider} from './RouterProvider'
-const connectedRoutes = [{
+const connectedRoutes = [
+{
     method: HttpMethod.GET,
     path: '/employee',
     handlers: [getEmployees]
+},
+{
+    method: HttpMethod.POST,
+    path: '/employee',
+    handlers: [createEmployee]
+},
+{
+    method: HttpMethod.GET,
+    path: "/employee/:id",
+    handlers: [getEmployeeByID]
+},
+{
+    method: HttpMethod.PUT,
+    path: '/employee/:id',
+    handlers: [modifyEmployeeByID]
+},
+{
+    method: HttpMethod.DELETE,
+    path: '/employee/:id',
+    handlers: [deleteEmployeeByID]
 }]
+
 const nonConnectedRoutes = [{
     method: HttpMethod.POST,
-    path: '/login',
+    path: '/auth/login',
     handlers: [login]
 },
 {
     method: HttpMethod.POST,
-    path: '/register',
+    path: '/auth/register',
     handlers: [register]
 }]
 

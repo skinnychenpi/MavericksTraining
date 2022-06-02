@@ -1,11 +1,11 @@
 import { User, userSchema } from "./Auth.model";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import {LoginDTO, LoginResponseDTO } from './Auth.dto';
+import {LoginDTO, LoginResponseDTO, RegisterResponseDTO } from './Auth.dto';
 
 export class AuthService {
 
-    register = async (user : User) : Promise<{userName: string, email: string, token: string}> => {
+    register = async (user : User) : Promise<RegisterResponseDTO> => {
         await userSchema.validateAsync(user);
         const hashedPwd = await bcrypt.hash(user.password, 10);
         user.password = hashedPwd;
@@ -14,7 +14,7 @@ export class AuthService {
             { userName: user.userName, email: user.email },
             process.env.TOKEN_KEY,
             {
-              expiresIn: "2h",
+              expiresIn: 60 * 5,
             }
         );
         
@@ -31,7 +31,7 @@ export class AuthService {
                 { userName: userFound.userName, email: user.email },
                 process.env.TOKEN_KEY,
                 {
-                  expiresIn: "2h",
+                  expiresIn: 60 * 5,
                 }
             );
             return {token: token};            
