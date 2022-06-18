@@ -1,8 +1,8 @@
 import router from './Routes/Router'
 import { json } from 'body-parser'
 import express, {Request, Response, NextFunction} from 'express'
-import { Sequelize } from 'sequelize'
-import {config, sequelizeConfig} from './configuration'
+// import { Sequelize } from 'sequelize'
+// import {config, sequelizeConfig} from './configuration'
 import connection from './DB/config'
 import cors from 'cors';
 

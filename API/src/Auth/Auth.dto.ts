@@ -12,3 +12,5 @@ export class RegisterResponseDTO {
     email: string;
     token: string;
 }
+
+//DTO = Data Tranfer Object

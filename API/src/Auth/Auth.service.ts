@@ -1,5 +1,5 @@
 import { User, userSchema } from "./Auth.model";
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import {LoginDTO, LoginResponseDTO, RegisterResponseDTO } from './Auth.dto';
 
